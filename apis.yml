@@ -8,10 +8,10 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Precious Metals
-  - Gold
-  - Silver
   - Financial Data
+  - Gold
+  - Precious Metals
+  - Silver
   - Spot Prices
 url: >-
   https://raw.githubusercontent.com/api-evangelist/metals-dev/refs/heads/main/apis.yml
@@ -28,9 +28,9 @@ apis:
     humanURL: https://metals.dev/docs
     baseURL: https://api.metals.dev/v1
     tags:
+      - Financial Data
       - Precious Metals
       - Spot Prices
-      - Financial Data
     properties:
       - type: Documentation
         url: https://metals.dev/docs
