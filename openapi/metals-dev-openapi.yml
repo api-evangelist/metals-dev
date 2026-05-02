@@ -1,0 +1,297 @@
+openapi: 3.1.0
+info:
+  title: Metals.Dev API
+  description: >-
+    Metals.Dev provides a developer-friendly JSON API for spot prices of precious
+    metals, industrial metals, and currency conversion rates. It offers real-time
+    prices from leading authorities including LBMA, LME, MCX, and IBJA, plus
+    5+ years of historical data.
+  version: '1.0'
+  contact:
+    name: Metals.Dev
+    url: https://metals.dev/
+  license:
+    name: Proprietary
+    url: https://metals.dev/terms
+servers:
+  - url: https://api.metals.dev/v1
+    description: Production
+security:
+  - apiKey: []
+tags:
+  - name: Rates
+    description: Latest and historical metal and currency rates.
+  - name: Spot Prices
+    description: Spot pricing for individual metals.
+  - name: Authority
+    description: Authority pricing from LBMA, LME, MCX, and IBJA.
+  - name: Currency
+    description: Currency rates and conversions.
+  - name: Account
+    description: Usage and quota information.
+paths:
+  /latest:
+    get:
+      summary: Get latest rates
+      description: Returns live metal prices and 170+ currency conversion rates with timestamps.
+      operationId: getLatest
+      tags:
+        - Rates
+      parameters:
+        - name: currency
+          in: query
+          description: Three-letter currency code. Defaults to USD.
+          schema:
+            type: string
+            default: USD
+        - name: unit
+          in: query
+          description: Unit of measure (toz, g, kg, mt). Defaults to toz for precious metals and mt for industrial.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Latest rates.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LatestResponse'
+  /metal/spot:
+    get:
+      summary: Get spot metal price
+      description: Returns spot price, bid/ask, high/low, and change data for the selected metal.
+      operationId: getMetalSpot
+      tags:
+        - Spot Prices
+      parameters:
+        - name: metal
+          in: query
+          required: true
+          description: Metal symbol.
+          schema:
+            type: string
+            enum:
+              - gold
+              - silver
+              - platinum
+              - palladium
+              - aluminum
+              - copper
+              - nickel
+              - lead
+              - zinc
+        - name: currency
+          in: query
+          description: Three-letter currency code.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Spot price details for a metal.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpotResponse'
+  /metal/authority:
+    get:
+      summary: Get authority metal price
+      description: Returns prices from leading exchanges and authorities.
+      operationId: getMetalAuthority
+      tags:
+        - Authority
+      parameters:
+        - name: authority
+          in: query
+          required: true
+          description: Authority code.
+          schema:
+            type: string
+            enum:
+              - lbma
+              - lme
+              - mcx
+              - ibja
+        - name: currency
+          in: query
+          schema:
+            type: string
+        - name: unit
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Authority pricing data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorityResponse'
+  /currencies:
+    get:
+      summary: Get currency rates
+      description: Returns supported currency conversion rates.
+      operationId: getCurrencies
+      tags:
+        - Currency
+      parameters:
+        - name: base
+          in: query
+          description: Base currency for conversion.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Currency rates.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrenciesResponse'
+  /timeseries:
+    get:
+      summary: Get historical timeseries
+      description: Returns daily historical rates. Maximum 30-day range per request.
+      operationId: getTimeseries
+      tags:
+        - Rates
+      parameters:
+        - name: start_date
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Historical timeseries.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeseriesResponse'
+  /usage:
+    get:
+      summary: Get account usage
+      description: Returns current usage, plan details, and remaining quota.
+      operationId: getUsage
+      tags:
+        - Account
+      responses:
+        '200':
+          description: Usage information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageResponse'
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key
+  schemas:
+    BaseResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        currency:
+          type: string
+        unit:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        error_code:
+          type: integer
+        error_message:
+          type: string
+    LatestResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            metals:
+              type: object
+              additionalProperties:
+                type: number
+            currencies:
+              type: object
+              additionalProperties:
+                type: number
+    SpotResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            metal:
+              type: string
+            rate:
+              type: object
+              properties:
+                price:
+                  type: number
+                ask:
+                  type: number
+                bid:
+                  type: number
+                high:
+                  type: number
+                low:
+                  type: number
+                change:
+                  type: number
+                change_percent:
+                  type: number
+    AuthorityResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            authority:
+              type: string
+            metals:
+              type: object
+              additionalProperties:
+                type: number
+    CurrenciesResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            currencies:
+              type: object
+              additionalProperties:
+                type: number
+    TimeseriesResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            start_date:
+              type: string
+              format: date
+            end_date:
+              type: string
+              format: date
+            rates:
+              type: object
+              additionalProperties:
+                type: object
+    UsageResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        plan:
+          type: string
+        usage:
+          type: integer
+        limit:
+          type: integer
+        remaining:
+          type: integer

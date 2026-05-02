@@ -16,7 +16,7 @@ tags:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/metals-dev/refs/heads/main/apis.yml
 created: '2025-03-01'
-modified: '2026-03-16'
+modified: '2026-04-28'
 specificationVersion: '0.19'
 apis:
   - aid: metals-dev:metals-dev-api
@@ -36,6 +36,8 @@ apis:
         url: https://metals.dev/docs
       - type: Getting Started
         url: https://metals.dev/docs#getting-started
+      - type: OpenAPI
+        url: openapi/metals-dev-openapi.yml
 common:
   - type: Portal
     url: https://metals.dev/

@@ -16,7 +16,7 @@ Metals.Dev provides a developer-friendly JSON API for spot prices of precious me
 ## Timestamps
 
 - **Created:** 2025-03-01 
-- **Modified:** 2026-03-16 
+- **Modified:** 2026-04-28 
 
 ## APIs
 
@@ -34,6 +34,7 @@ The Metals.Dev API provides a simple, developer-friendly JSON API for real-time 
 
 - [Documentation](https://metals.dev/docs)
 - [Getting Started](https://metals.dev/docs#getting-started)
+- [OpenAPI](openapi/metals-dev-openapi.yml)
 
 ## Common Properties
 
