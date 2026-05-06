@@ -1,0 +1,325 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metals.Dev API
+  description: Metals.Dev provides a developer-friendly JSON API for spot prices of precious metals, industrial metals, and
+    currency conversion rates. It offers real-time prices from leading authorities including LBMA, LME, MCX, and IBJA, plus
+    5+ years of historical data.
+  tags:
+  - Metals
+  - Dev
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: metals-dev
+    baseUri: https://api.metals.dev/v1
+    description: Metals.Dev API HTTP API.
+    authentication:
+      type: apikey
+      in: query
+      name: api_key
+      value: '{{METALS_DEV_TOKEN}}'
+    resources:
+    - name: latest
+      path: /latest
+      operations:
+      - name: getlatest
+        method: GET
+        description: Get latest rates
+        inputParameters:
+        - name: currency
+          in: query
+          type: string
+          description: Three-letter currency code. Defaults to USD.
+        - name: unit
+          in: query
+          type: string
+          description: Unit of measure (toz, g, kg, mt). Defaults to toz for precious metals and mt for industrial.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: metal-spot
+      path: /metal/spot
+      operations:
+      - name: getmetalspot
+        method: GET
+        description: Get spot metal price
+        inputParameters:
+        - name: metal
+          in: query
+          type: string
+          required: true
+          description: Metal symbol.
+        - name: currency
+          in: query
+          type: string
+          description: Three-letter currency code.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: metal-authority
+      path: /metal/authority
+      operations:
+      - name: getmetalauthority
+        method: GET
+        description: Get authority metal price
+        inputParameters:
+        - name: authority
+          in: query
+          type: string
+          required: true
+          description: Authority code.
+        - name: currency
+          in: query
+          type: string
+        - name: unit
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: currencies
+      path: /currencies
+      operations:
+      - name: getcurrencies
+        method: GET
+        description: Get currency rates
+        inputParameters:
+        - name: base
+          in: query
+          type: string
+          description: Base currency for conversion.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: timeseries
+      path: /timeseries
+      operations:
+      - name: gettimeseries
+        method: GET
+        description: Get historical timeseries
+        inputParameters:
+        - name: start_date
+          in: query
+          type: string
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: usage
+      path: /usage
+      operations:
+      - name: getusage
+        method: GET
+        description: Get account usage
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: metals-dev-rest
+    description: REST adapter for Metals.Dev API.
+    resources:
+    - path: /latest
+      name: getlatest
+      operations:
+      - method: GET
+        name: getlatest
+        description: Get latest rates
+        call: metals-dev.getlatest
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /metal/spot
+      name: getmetalspot
+      operations:
+      - method: GET
+        name: getmetalspot
+        description: Get spot metal price
+        call: metals-dev.getmetalspot
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /metal/authority
+      name: getmetalauthority
+      operations:
+      - method: GET
+        name: getmetalauthority
+        description: Get authority metal price
+        call: metals-dev.getmetalauthority
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /currencies
+      name: getcurrencies
+      operations:
+      - method: GET
+        name: getcurrencies
+        description: Get currency rates
+        call: metals-dev.getcurrencies
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /timeseries
+      name: gettimeseries
+      operations:
+      - method: GET
+        name: gettimeseries
+        description: Get historical timeseries
+        call: metals-dev.gettimeseries
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /usage
+      name: getusage
+      operations:
+      - method: GET
+        name: getusage
+        description: Get account usage
+        call: metals-dev.getusage
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: metals-dev-mcp
+    transport: http
+    description: MCP adapter for Metals.Dev API for AI agent use.
+    tools:
+    - name: getlatest
+      description: Get latest rates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metals-dev.getlatest
+      with:
+        currency: tools.currency
+        unit: tools.unit
+      inputParameters:
+      - name: currency
+        type: string
+        description: Three-letter currency code. Defaults to USD.
+      - name: unit
+        type: string
+        description: Unit of measure (toz, g, kg, mt). Defaults to toz for precious metals and mt for industrial.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getmetalspot
+      description: Get spot metal price
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metals-dev.getmetalspot
+      with:
+        metal: tools.metal
+        currency: tools.currency
+      inputParameters:
+      - name: metal
+        type: string
+        description: Metal symbol.
+        required: true
+      - name: currency
+        type: string
+        description: Three-letter currency code.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getmetalauthority
+      description: Get authority metal price
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metals-dev.getmetalauthority
+      with:
+        authority: tools.authority
+        currency: tools.currency
+        unit: tools.unit
+      inputParameters:
+      - name: authority
+        type: string
+        description: Authority code.
+        required: true
+      - name: currency
+        type: string
+        description: currency
+      - name: unit
+        type: string
+        description: unit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getcurrencies
+      description: Get currency rates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metals-dev.getcurrencies
+      with:
+        base: tools.base
+      inputParameters:
+      - name: base
+        type: string
+        description: Base currency for conversion.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gettimeseries
+      description: Get historical timeseries
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metals-dev.gettimeseries
+      with:
+        start_date: tools.start_date
+        end_date: tools.end_date
+      inputParameters:
+      - name: start_date
+        type: string
+        description: start_date
+        required: true
+      - name: end_date
+        type: string
+        description: end_date
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getusage
+      description: Get account usage
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metals-dev.getusage
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    METALS_DEV_TOKEN: METALS_DEV_TOKEN
