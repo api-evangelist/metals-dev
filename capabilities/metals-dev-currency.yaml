@@ -1,0 +1,81 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metals.Dev API — Currency
+  description: 'Metals.Dev API — Currency. 1 operations. Lead operation: Get currency rates. Self-contained Naftiko capability
+    covering one Metals Dev business surface.'
+  tags:
+  - Metals Dev
+  - Currency
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    METALS_DEV_API_KEY: METALS_DEV_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metals-dev-currency
+    baseUri: https://api.metals.dev/v1
+    description: Metals.Dev API — Currency business capability. Self-contained, no shared references.
+    resources:
+    - name: currencies
+      path: /currencies
+      operations:
+      - name: getcurrencies
+        method: GET
+        description: Get currency rates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: base
+          in: query
+          type: string
+          description: Base currency for conversion.
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.METALS_DEV_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: metals-dev-currency-rest
+    port: 8080
+    description: REST adapter for Metals.Dev API — Currency. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/currencies
+      name: currencies
+      description: REST surface for currencies.
+      operations:
+      - method: GET
+        name: getcurrencies
+        description: Get currency rates
+        call: metals-dev-currency.getcurrencies
+        with:
+          base: rest.base
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metals-dev-currency-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metals.Dev API — Currency. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-currency-rates
+      description: Get currency rates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metals-dev-currency.getcurrencies
+      with:
+        base: tools.base
+      outputParameters:
+      - type: object
+        mapping: $.

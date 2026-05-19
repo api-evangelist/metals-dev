@@ -1,0 +1,88 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metals.Dev API — Spot Prices
+  description: 'Metals.Dev API — Spot Prices. 1 operations. Lead operation: Get spot metal price. Self-contained Naftiko capability
+    covering one Metals Dev business surface.'
+  tags:
+  - Metals Dev
+  - Spot Prices
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    METALS_DEV_API_KEY: METALS_DEV_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metals-dev-spot-prices
+    baseUri: https://api.metals.dev/v1
+    description: Metals.Dev API — Spot Prices business capability. Self-contained, no shared references.
+    resources:
+    - name: metal-spot
+      path: /metal/spot
+      operations:
+      - name: getmetalspot
+        method: GET
+        description: Get spot metal price
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: metal
+          in: query
+          type: string
+          description: Metal symbol.
+          required: true
+        - name: currency
+          in: query
+          type: string
+          description: Three-letter currency code.
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.METALS_DEV_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: metals-dev-spot-prices-rest
+    port: 8080
+    description: REST adapter for Metals.Dev API — Spot Prices. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/metal/spot
+      name: metal-spot
+      description: REST surface for metal-spot.
+      operations:
+      - method: GET
+        name: getmetalspot
+        description: Get spot metal price
+        call: metals-dev-spot-prices.getmetalspot
+        with:
+          metal: rest.metal
+          currency: rest.currency
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metals-dev-spot-prices-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metals.Dev API — Spot Prices. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-spot-metal-price
+      description: Get spot metal price
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metals-dev-spot-prices.getmetalspot
+      with:
+        metal: tools.metal
+        currency: tools.currency
+      outputParameters:
+      - type: object
+        mapping: $.

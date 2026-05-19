@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metals.Dev API — Account
+  description: 'Metals.Dev API — Account. 1 operations. Lead operation: Get account usage. Self-contained Naftiko capability
+    covering one Metals Dev business surface.'
+  tags:
+  - Metals Dev
+  - Account
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    METALS_DEV_API_KEY: METALS_DEV_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metals-dev-account
+    baseUri: https://api.metals.dev/v1
+    description: Metals.Dev API — Account business capability. Self-contained, no shared references.
+    resources:
+    - name: usage
+      path: /usage
+      operations:
+      - name: getusage
+        method: GET
+        description: Get account usage
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.METALS_DEV_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: metals-dev-account-rest
+    port: 8080
+    description: REST adapter for Metals.Dev API — Account. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/usage
+      name: usage
+      description: REST surface for usage.
+      operations:
+      - method: GET
+        name: getusage
+        description: Get account usage
+        call: metals-dev-account.getusage
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metals-dev-account-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metals.Dev API — Account. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-account-usage
+      description: Get account usage
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metals-dev-account.getusage
+      outputParameters:
+      - type: object
+        mapping: $.

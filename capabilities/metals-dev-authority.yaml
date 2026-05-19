@@ -1,0 +1,92 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metals.Dev API — Authority
+  description: 'Metals.Dev API — Authority. 1 operations. Lead operation: Get authority metal price. Self-contained Naftiko
+    capability covering one Metals Dev business surface.'
+  tags:
+  - Metals Dev
+  - Authority
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    METALS_DEV_API_KEY: METALS_DEV_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metals-dev-authority
+    baseUri: https://api.metals.dev/v1
+    description: Metals.Dev API — Authority business capability. Self-contained, no shared references.
+    resources:
+    - name: metal-authority
+      path: /metal/authority
+      operations:
+      - name: getmetalauthority
+        method: GET
+        description: Get authority metal price
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: authority
+          in: query
+          type: string
+          description: Authority code.
+          required: true
+        - name: currency
+          in: query
+          type: string
+        - name: unit
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.METALS_DEV_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: metals-dev-authority-rest
+    port: 8080
+    description: REST adapter for Metals.Dev API — Authority. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/metal/authority
+      name: metal-authority
+      description: REST surface for metal-authority.
+      operations:
+      - method: GET
+        name: getmetalauthority
+        description: Get authority metal price
+        call: metals-dev-authority.getmetalauthority
+        with:
+          authority: rest.authority
+          currency: rest.currency
+          unit: rest.unit
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metals-dev-authority-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metals.Dev API — Authority. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-authority-metal-price
+      description: Get authority metal price
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metals-dev-authority.getmetalauthority
+      with:
+        authority: tools.authority
+        currency: tools.currency
+        unit: tools.unit
+      outputParameters:
+      - type: object
+        mapping: $.
