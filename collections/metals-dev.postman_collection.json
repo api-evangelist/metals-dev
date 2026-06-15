@@ -1,0 +1,650 @@
+{
+  "item": [
+    {
+      "id": "83fea836-ad4d-497a-a0a8-3a2ee0350d75",
+      "name": "Rates",
+      "description": {
+        "content": "Latest and historical metal and currency rates.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6b175faa-f6e1-4943-8eb6-8a1cebaaca75",
+          "name": "Get latest rates",
+          "request": {
+            "name": "Get latest rates",
+            "description": {
+              "content": "Returns live metal prices and 170+ currency conversion rates with timestamps.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "USD",
+                  "description": "Three-letter currency code. Defaults to USD."
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "<string>",
+                  "description": "Unit of measure (toz, g, kg, mt). Defaults to toz for precious metals and mt for industrial."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "629872bb-3f25-4fcb-bdc4-3a244f8d1e28",
+              "name": "Latest rates.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"currency\": \"string\",\n  \"unit\": \"string\",\n  \"timestamp\": \"2010-09-26T05:22:00.221Z\",\n  \"error_code\": 2435,\n  \"error_message\": \"string\",\n  \"metals\": {\n    \"key_0\": 520.2394930748211\n  },\n  \"currencies\": {\n    \"key_0\": 6819.012565314678\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74e35cde-7d2e-4fa3-bfe2-80e7b5f75294",
+          "name": "Get historical timeseries",
+          "request": {
+            "name": "Get historical timeseries",
+            "description": {
+              "content": "Returns daily historical rates. Maximum 30-day range per request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "timeseries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7191d18d-9cf2-4b00-86f5-11e005c819e1",
+              "name": "Historical timeseries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timeseries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"currency\": \"string\",\n  \"unit\": \"string\",\n  \"timestamp\": \"2020-04-20T02:50:04.172Z\",\n  \"error_code\": 8144,\n  \"error_message\": \"string\",\n  \"start_date\": \"1949-02-14\",\n  \"end_date\": \"2019-08-19\",\n  \"rates\": {\n    \"key_0\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e26d97e6-37ce-48bb-bfc1-837ebbfa5f05",
+      "name": "Spot Prices",
+      "description": {
+        "content": "Spot pricing for individual metals.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "010c850e-dbf3-4d93-99e0-5d2ab128c9ca",
+          "name": "Get spot metal price",
+          "request": {
+            "name": "Get spot metal price",
+            "description": {
+              "content": "Returns spot price, bid/ask, high/low, and change data for the selected metal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metal",
+                "spot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "metal",
+                  "value": "<string>",
+                  "description": "(Required) Metal symbol."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "Three-letter currency code."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "da10fe0c-eef7-4107-80c9-c9dce1d7f2ce",
+              "name": "Spot price details for a metal.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metal",
+                    "spot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"currency\": \"string\",\n  \"unit\": \"string\",\n  \"timestamp\": \"1999-03-29T19:46:11.010Z\",\n  \"error_code\": 9031,\n  \"error_message\": \"string\",\n  \"metal\": \"string\",\n  \"rate\": {\n    \"price\": 8352.909178828086,\n    \"ask\": 6015.424566091349,\n    \"bid\": 9464.100614377163,\n    \"high\": 9241.812859771473,\n    \"low\": 9704.653763526672,\n    \"change\": 6370.714204687991,\n    \"change_percent\": 513.2929469693081\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0387f687-a8b5-46d9-afe9-41730f920d66",
+      "name": "Authority",
+      "description": {
+        "content": "Authority pricing from LBMA, LME, MCX, and IBJA.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "55f52fb9-efd6-44b6-a77b-b3cb51362ab9",
+          "name": "Get authority metal price",
+          "request": {
+            "name": "Get authority metal price",
+            "description": {
+              "content": "Returns prices from leading exchanges and authorities.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metal",
+                "authority"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authority",
+                  "value": "<string>",
+                  "description": "(Required) Authority code."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77887b12-3255-41bd-980c-b4e1d78f4be1",
+              "name": "Authority pricing data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metal",
+                    "authority"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authority",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"currency\": \"string\",\n  \"unit\": \"string\",\n  \"timestamp\": \"2020-09-06T20:46:49.414Z\",\n  \"error_code\": 4006,\n  \"error_message\": \"string\",\n  \"authority\": \"string\",\n  \"metals\": {\n    \"key_0\": 5427.796040087202\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e9c0d3c3-738c-4e8d-816a-9f5aa1556ee8",
+      "name": "Currency",
+      "description": {
+        "content": "Currency rates and conversions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7cff19fb-7952-4e14-ac38-283c8cd69d1f",
+          "name": "Get currency rates",
+          "request": {
+            "name": "Get currency rates",
+            "description": {
+              "content": "Returns supported currency conversion rates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "currencies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "base",
+                  "value": "<string>",
+                  "description": "Base currency for conversion."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ceb74203-7927-4265-b451-3335a01ecad2",
+              "name": "Currency rates.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "currencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"currency\": \"string\",\n  \"unit\": \"string\",\n  \"timestamp\": \"2022-01-18T20:23:43.853Z\",\n  \"error_code\": 6720,\n  \"error_message\": \"string\",\n  \"currencies\": {\n    \"key_0\": 8488.125942467368,\n    \"key_1\": 9742.00359397526\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "fe28fe1e-00dd-4d62-beb4-36b424285c32",
+      "name": "Account",
+      "description": {
+        "content": "Usage and quota information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4095083c-fc7e-44d7-8ecf-728a28221d93",
+          "name": "Get account usage",
+          "request": {
+            "name": "Get account usage",
+            "description": {
+              "content": "Returns current usage, plan details, and remaining quota.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "usage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "052efe61-88b7-49bb-8ec1-d9443d8af30e",
+              "name": "Usage information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"plan\": \"string\",\n  \"usage\": 9104,\n  \"limit\": 991,\n  \"remaining\": 7949\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.metals.dev/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bdc82594-ed5c-4ec4-b233-8d146c0ba01c",
+    "name": "Metals.Dev API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Metals.Dev provides a developer-friendly JSON API for spot prices of precious metals, industrial metals, and currency conversion rates. It offers real-time prices from leading authorities including LBMA, LME, MCX, and IBJA, plus 5+ years of historical data.\n\nContact Support:\n Name: Metals.Dev",
+      "type": "text/plain"
+    }
+  }
+}

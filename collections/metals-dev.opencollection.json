@@ -1,0 +1,190 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Metals.Dev API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get latest rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.metals.dev/v1/latest",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Three-letter currency code. Defaults to USD."
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query",
+                "description": "Unit of measure (toz, g, kg, mt). Defaults to toz for precious metals and mt for industrial."
+              }
+            ]
+          },
+          "docs": "Returns live metal prices and 170+ currency conversion rates with timestamps."
+        },
+        {
+          "info": {
+            "name": "Get historical timeseries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.metals.dev/v1/timeseries",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns daily historical rates. Maximum 30-day range per request."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Spot Prices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get spot metal price",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.metals.dev/v1/metal/spot",
+            "params": [
+              {
+                "name": "metal",
+                "value": "",
+                "type": "query",
+                "description": "Metal symbol."
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Three-letter currency code."
+              }
+            ]
+          },
+          "docs": "Returns spot price, bid/ask, high/low, and change data for the selected metal."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Authority",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get authority metal price",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.metals.dev/v1/metal/authority",
+            "params": [
+              {
+                "name": "authority",
+                "value": "",
+                "type": "query",
+                "description": "Authority code."
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns prices from leading exchanges and authorities."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Currency",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get currency rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.metals.dev/v1/currencies",
+            "params": [
+              {
+                "name": "base",
+                "value": "",
+                "type": "query",
+                "description": "Base currency for conversion."
+              }
+            ]
+          },
+          "docs": "Returns supported currency conversion rates."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Account",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get account usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.metals.dev/v1/usage"
+          },
+          "docs": "Returns current usage, plan details, and remaining quota."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
