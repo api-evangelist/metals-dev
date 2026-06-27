@@ -44,7 +44,7 @@ common:
     url: https://metals.dev/pricing
   - type: StatusPage
     url: https://metals.dev/status
-  - type: SignUp
+  - type: Signup
     url: https://metals.dev/sign-up
 maintainers:
   - FN: Kin Lane
