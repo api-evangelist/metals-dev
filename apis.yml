@@ -36,6 +36,8 @@ apis:
       - type: OpenAPI
         url: openapi/metals-dev-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/metals-dev-agentic-access.yml
   - type: DomainSecurity
     url: security/metals-dev-domain-security.yml
   - type: Authentication
