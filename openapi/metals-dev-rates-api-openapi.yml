@@ -1,0 +1,124 @@
+openapi: 3.1.0
+info:
+  title: Metals.Dev Account Rates API
+  description: Metals.Dev provides a developer-friendly JSON API for spot prices of precious metals, industrial metals, and currency conversion rates. It offers real-time prices from leading authorities including LBMA, LME, MCX, and IBJA, plus 5+ years of historical data.
+  version: '1.0'
+  contact:
+    name: Metals.Dev
+    url: https://metals.dev/
+  license:
+    name: Proprietary
+    url: https://metals.dev/terms
+servers:
+- url: https://api.metals.dev/v1
+  description: Production
+security:
+- apiKey: []
+tags:
+- name: Rates
+  description: Latest and historical metal and currency rates.
+paths:
+  /latest:
+    get:
+      summary: Get latest rates
+      description: Returns live metal prices and 170+ currency conversion rates with timestamps.
+      operationId: getLatest
+      tags:
+      - Rates
+      parameters:
+      - name: currency
+        in: query
+        description: Three-letter currency code. Defaults to USD.
+        schema:
+          type: string
+          default: USD
+      - name: unit
+        in: query
+        description: Unit of measure (toz, g, kg, mt). Defaults to toz for precious metals and mt for industrial.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Latest rates.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LatestResponse'
+  /timeseries:
+    get:
+      summary: Get historical timeseries
+      description: Returns daily historical rates. Maximum 30-day range per request.
+      operationId: getTimeseries
+      tags:
+      - Rates
+      parameters:
+      - name: start_date
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: end_date
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Historical timeseries.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeseriesResponse'
+components:
+  schemas:
+    BaseResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        currency:
+          type: string
+        unit:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        error_code:
+          type: integer
+        error_message:
+          type: string
+    TimeseriesResponse:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        properties:
+          start_date:
+            type: string
+            format: date
+          end_date:
+            type: string
+            format: date
+          rates:
+            type: object
+            additionalProperties:
+              type: object
+    LatestResponse:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        properties:
+          metals:
+            type: object
+            additionalProperties:
+              type: number
+          currencies:
+            type: object
+            additionalProperties:
+              type: number
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key

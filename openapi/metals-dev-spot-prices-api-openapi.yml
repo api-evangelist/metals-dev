@@ -1,0 +1,103 @@
+openapi: 3.1.0
+info:
+  title: Metals.Dev Account Spot Prices API
+  description: Metals.Dev provides a developer-friendly JSON API for spot prices of precious metals, industrial metals, and currency conversion rates. It offers real-time prices from leading authorities including LBMA, LME, MCX, and IBJA, plus 5+ years of historical data.
+  version: '1.0'
+  contact:
+    name: Metals.Dev
+    url: https://metals.dev/
+  license:
+    name: Proprietary
+    url: https://metals.dev/terms
+servers:
+- url: https://api.metals.dev/v1
+  description: Production
+security:
+- apiKey: []
+tags:
+- name: Spot Prices
+  description: Spot pricing for individual metals.
+paths:
+  /metal/spot:
+    get:
+      summary: Get spot metal price
+      description: Returns spot price, bid/ask, high/low, and change data for the selected metal.
+      operationId: getMetalSpot
+      tags:
+      - Spot Prices
+      parameters:
+      - name: metal
+        in: query
+        required: true
+        description: Metal symbol.
+        schema:
+          type: string
+          enum:
+          - gold
+          - silver
+          - platinum
+          - palladium
+          - aluminum
+          - copper
+          - nickel
+          - lead
+          - zinc
+      - name: currency
+        in: query
+        description: Three-letter currency code.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Spot price details for a metal.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpotResponse'
+components:
+  schemas:
+    SpotResponse:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        properties:
+          metal:
+            type: string
+          rate:
+            type: object
+            properties:
+              price:
+                type: number
+              ask:
+                type: number
+              bid:
+                type: number
+              high:
+                type: number
+              low:
+                type: number
+              change:
+                type: number
+              change_percent:
+                type: number
+    BaseResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        currency:
+          type: string
+        unit:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        error_code:
+          type: integer
+        error_message:
+          type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key

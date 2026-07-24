@@ -1,0 +1,88 @@
+openapi: 3.1.0
+info:
+  title: Metals.Dev Account Authority API
+  description: Metals.Dev provides a developer-friendly JSON API for spot prices of precious metals, industrial metals, and currency conversion rates. It offers real-time prices from leading authorities including LBMA, LME, MCX, and IBJA, plus 5+ years of historical data.
+  version: '1.0'
+  contact:
+    name: Metals.Dev
+    url: https://metals.dev/
+  license:
+    name: Proprietary
+    url: https://metals.dev/terms
+servers:
+- url: https://api.metals.dev/v1
+  description: Production
+security:
+- apiKey: []
+tags:
+- name: Authority
+  description: Authority pricing from LBMA, LME, MCX, and IBJA.
+paths:
+  /metal/authority:
+    get:
+      summary: Get authority metal price
+      description: Returns prices from leading exchanges and authorities.
+      operationId: getMetalAuthority
+      tags:
+      - Authority
+      parameters:
+      - name: authority
+        in: query
+        required: true
+        description: Authority code.
+        schema:
+          type: string
+          enum:
+          - lbma
+          - lme
+          - mcx
+          - ibja
+      - name: currency
+        in: query
+        schema:
+          type: string
+      - name: unit
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Authority pricing data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorityResponse'
+components:
+  schemas:
+    AuthorityResponse:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        properties:
+          authority:
+            type: string
+          metals:
+            type: object
+            additionalProperties:
+              type: number
+    BaseResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        currency:
+          type: string
+        unit:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        error_code:
+          type: integer
+        error_message:
+          type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key

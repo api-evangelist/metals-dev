@@ -1,0 +1,54 @@
+openapi: 3.1.0
+info:
+  title: Metals.Dev Account API
+  description: Metals.Dev provides a developer-friendly JSON API for spot prices of precious metals, industrial metals, and currency conversion rates. It offers real-time prices from leading authorities including LBMA, LME, MCX, and IBJA, plus 5+ years of historical data.
+  version: '1.0'
+  contact:
+    name: Metals.Dev
+    url: https://metals.dev/
+  license:
+    name: Proprietary
+    url: https://metals.dev/terms
+servers:
+- url: https://api.metals.dev/v1
+  description: Production
+security:
+- apiKey: []
+tags:
+- name: Account
+  description: Usage and quota information.
+paths:
+  /usage:
+    get:
+      summary: Get account usage
+      description: Returns current usage, plan details, and remaining quota.
+      operationId: getUsage
+      tags:
+      - Account
+      responses:
+        '200':
+          description: Usage information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageResponse'
+components:
+  schemas:
+    UsageResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        plan:
+          type: string
+        usage:
+          type: integer
+        limit:
+          type: integer
+        remaining:
+          type: integer
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key
