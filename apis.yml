@@ -5,7 +5,20 @@ description: >-
   conversion rates. It offers real-time prices from leading authorities including LBMA, LME, MCX, and IBJA, plus 5+
   years of historical data.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/metals-dev.png
 tags:
   - Financial Data
   - Gold
@@ -17,24 +30,76 @@ created: '2025-03-01'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: metals-dev:metals-dev-api
-    name: Metals.Dev API
-    description: >-
-      The Metals.Dev API provides a simple, developer-friendly JSON API for real-time spot prices of precious metals and
-      industrial metals, including bid, ask, low, high, change, and conversion rates against 170+ currencies.
-    humanURL: https://metals.dev/docs
-    baseURL: https://api.metals.dev/v1
-    tags:
-      - Financial Data
-      - Precious Metals
-      - Spot Prices
-    properties:
-      - type: Documentation
-        url: https://metals.dev/docs
-      - type: GettingStarted
-        url: https://metals.dev/docs#getting-started
-      - type: OpenAPI
-        url: openapi/metals-dev-openapi.yml
+- aid: metals-dev:metals-dev-account-api
+  name: Metals.Dev Account API
+  description: Usage and quota information.
+  humanURL: https://metals.dev/docs
+  baseURL: https://api.metals.dev/v1
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/metals-dev-account-api-openapi.yml
+  - type: Documentation
+    url: https://metals.dev/docs
+  - type: GettingStarted
+    url: https://metals.dev/docs#getting-started
+- aid: metals-dev:metals-dev-authority-api
+  name: Metals.Dev Authority API
+  description: Authority pricing from LBMA, LME, MCX, and IBJA.
+  humanURL: https://metals.dev/docs
+  baseURL: https://api.metals.dev/v1
+  tags:
+  - Authority
+  properties:
+  - type: OpenAPI
+    url: openapi/metals-dev-authority-api-openapi.yml
+  - type: Documentation
+    url: https://metals.dev/docs
+  - type: GettingStarted
+    url: https://metals.dev/docs#getting-started
+- aid: metals-dev:metals-dev-currency-api
+  name: Metals.Dev Currency API
+  description: Currency rates and conversions.
+  humanURL: https://metals.dev/docs
+  baseURL: https://api.metals.dev/v1
+  tags:
+  - Currency
+  properties:
+  - type: OpenAPI
+    url: openapi/metals-dev-currency-api-openapi.yml
+  - type: Documentation
+    url: https://metals.dev/docs
+  - type: GettingStarted
+    url: https://metals.dev/docs#getting-started
+- aid: metals-dev:metals-dev-rates-api
+  name: Metals.Dev Rates API
+  description: Latest and historical metal and currency rates.
+  humanURL: https://metals.dev/docs
+  baseURL: https://api.metals.dev/v1
+  tags:
+  - Rates
+  properties:
+  - type: OpenAPI
+    url: openapi/metals-dev-rates-api-openapi.yml
+  - type: Documentation
+    url: https://metals.dev/docs
+  - type: GettingStarted
+    url: https://metals.dev/docs#getting-started
+- aid: metals-dev:metals-dev-spot-prices-api
+  name: Metals.Dev Spot Prices API
+  description: Spot pricing for individual metals.
+  humanURL: https://metals.dev/docs
+  baseURL: https://api.metals.dev/v1
+  tags:
+  - Spot Prices
+  properties:
+  - type: OpenAPI
+    url: openapi/metals-dev-spot-prices-api-openapi.yml
+  - type: Documentation
+    url: https://metals.dev/docs
+  - type: GettingStarted
+    url: https://metals.dev/docs#getting-started
 common:
   - type: AgenticAccess
     url: agentic-access/metals-dev-agentic-access.yml
