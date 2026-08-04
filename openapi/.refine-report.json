@@ -1,0 +1,22 @@
+{
+  "provider": "metals-dev",
+  "sources": [
+    "metals-dev-account-api-openapi.yml",
+    "metals-dev-authority-api-openapi.yml",
+    "metals-dev-currency-api-openapi.yml",
+    "metals-dev-rates-api-openapi.yml",
+    "metals-dev-spot-prices-api-openapi.yml"
+  ],
+  "outputs": [
+    "metals-dev-account-api-openapi.yml",
+    "metals-dev-authority-api-openapi.yml",
+    "metals-dev-currency-api-openapi.yml",
+    "metals-dev-rates-api-openapi.yml",
+    "metals-dev-spot-prices-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
