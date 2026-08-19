@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Metals.Dev Account Currency API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Currency",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get currency rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.metals.dev/v1/currencies",
+            "params": [
+              {
+                "name": "base",
+                "value": "",
+                "type": "query",
+                "description": "Base currency for conversion."
+              }
+            ]
+          },
+          "docs": "Returns supported currency conversion rates."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Metals.Dev Account Authority API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authority",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get authority metal price",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.metals.dev/v1/metal/authority",
+            "params": [
+              {
+                "name": "authority",
+                "value": "",
+                "type": "query",
+                "description": "Authority code."
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns prices from leading exchanges and authorities."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

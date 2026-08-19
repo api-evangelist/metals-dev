@@ -1,0 +1,155 @@
+{
+  "item": [
+    {
+      "id": "0f557eef-72b3-416f-b977-8ff202d59afe",
+      "name": "Authority",
+      "description": {
+        "content": "Authority pricing from LBMA, LME, MCX, and IBJA.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5df364ac-96ec-4c6c-9829-c33dac730847",
+          "name": "Get authority metal price",
+          "request": {
+            "name": "Get authority metal price",
+            "description": {
+              "content": "Returns prices from leading exchanges and authorities.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metal",
+                "authority"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authority",
+                  "value": "<string>",
+                  "description": "(Required) Authority code."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2a4a5e4d-ce2b-46d0-8aeb-fe70bbb556f9",
+              "name": "Authority pricing data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metal",
+                    "authority"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authority",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"currency\": \"string\",\n  \"unit\": \"string\",\n  \"timestamp\": \"2003-08-24T14:11:35.053Z\",\n  \"error_code\": 944,\n  \"error_message\": \"string\",\n  \"authority\": \"string\",\n  \"metals\": {\n    \"key_0\": 372.3299114504386\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.metals.dev/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bf23de3c-e16c-47b0-a141-b419c4445b9a",
+    "name": "Metals.Dev Account Authority API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Metals.Dev provides a developer-friendly JSON API for spot prices of precious metals, industrial metals, and currency conversion rates. It offers real-time prices from leading authorities including LBMA, LME, MCX, and IBJA, plus 5+ years of historical data.\n\nContact Support:\n Name: Metals.Dev",
+      "type": "text/plain"
+    }
+  }
+}

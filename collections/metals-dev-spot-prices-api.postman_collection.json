@@ -1,0 +1,147 @@
+{
+  "item": [
+    {
+      "id": "7b67da38-3aea-43b6-bc41-41bfd44f298b",
+      "name": "Spot Prices",
+      "description": {
+        "content": "Spot pricing for individual metals.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a9d03c1d-1135-4fc2-9083-beb7131a32d5",
+          "name": "Get spot metal price",
+          "request": {
+            "name": "Get spot metal price",
+            "description": {
+              "content": "Returns spot price, bid/ask, high/low, and change data for the selected metal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metal",
+                "spot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "metal",
+                  "value": "<string>",
+                  "description": "(Required) Metal symbol."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "Three-letter currency code."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0e608899-ac0e-47c8-84e5-dac483795d98",
+              "name": "Spot price details for a metal.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metal",
+                    "spot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"currency\": \"string\",\n  \"unit\": \"string\",\n  \"timestamp\": \"2018-10-21T00:38:27.730Z\",\n  \"error_code\": 7436,\n  \"error_message\": \"string\",\n  \"metal\": \"string\",\n  \"rate\": {\n    \"price\": 9583.781339599902,\n    \"ask\": 7148.25733973183,\n    \"bid\": 4974.048439782841,\n    \"high\": 7442.920463452152,\n    \"low\": 2172.867961982149,\n    \"change\": 9984.132058520445,\n    \"change_percent\": 5512.181611109784\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.metals.dev/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d2f1d211-1f9f-47d3-a312-d490ce3d893d",
+    "name": "Metals.Dev Account Spot Prices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Metals.Dev provides a developer-friendly JSON API for spot prices of precious metals, industrial metals, and currency conversion rates. It offers real-time prices from leading authorities including LBMA, LME, MCX, and IBJA, plus 5+ years of historical data.\n\nContact Support:\n Name: Metals.Dev",
+      "type": "text/plain"
+    }
+  }
+}

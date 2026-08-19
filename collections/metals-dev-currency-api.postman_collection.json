@@ -1,0 +1,135 @@
+{
+  "item": [
+    {
+      "id": "49ffb6dd-e448-4035-8dba-577e824fa425",
+      "name": "Currency",
+      "description": {
+        "content": "Currency rates and conversions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2e2082f7-fbad-4607-84ed-4847fec16927",
+          "name": "Get currency rates",
+          "request": {
+            "name": "Get currency rates",
+            "description": {
+              "content": "Returns supported currency conversion rates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "currencies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "base",
+                  "value": "<string>",
+                  "description": "Base currency for conversion."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e037e2f0-999a-4c71-8507-c4224f9993ea",
+              "name": "Currency rates.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "currencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"currency\": \"string\",\n  \"unit\": \"string\",\n  \"timestamp\": \"2009-01-11T23:42:12.235Z\",\n  \"error_code\": 4149,\n  \"error_message\": \"string\",\n  \"currencies\": {\n    \"key_0\": 8012.73319008931\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.metals.dev/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8f6c5858-6107-4fbf-b041-0d512d2b9410",
+    "name": "Metals.Dev Account Currency API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Metals.Dev provides a developer-friendly JSON API for spot prices of precious metals, industrial metals, and currency conversion rates. It offers real-time prices from leading authorities including LBMA, LME, MCX, and IBJA, plus 5+ years of historical data.\n\nContact Support:\n Name: Metals.Dev",
+      "type": "text/plain"
+    }
+  }
+}

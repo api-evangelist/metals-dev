@@ -1,0 +1,124 @@
+{
+  "item": [
+    {
+      "id": "d1196eb9-9850-4f89-803b-dd6343def48e",
+      "name": "Account",
+      "description": {
+        "content": "Usage and quota information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "80de6d6a-e32a-47ab-9dcd-574206bdbfbb",
+          "name": "Get account usage",
+          "request": {
+            "name": "Get account usage",
+            "description": {
+              "content": "Returns current usage, plan details, and remaining quota.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "usage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ce71b480-4aa9-4654-a4dd-f4b290d49fec",
+              "name": "Usage information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"plan\": \"string\",\n  \"usage\": 4621,\n  \"limit\": 4672,\n  \"remaining\": 9318\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.metals.dev/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8157f22e-cd0e-4fac-977f-cd9a2230cf3f",
+    "name": "Metals.Dev Account API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Metals.Dev provides a developer-friendly JSON API for spot prices of precious metals, industrial metals, and currency conversion rates. It offers real-time prices from leading authorities including LBMA, LME, MCX, and IBJA, plus 5+ years of historical data.\n\nContact Support:\n Name: Metals.Dev",
+      "type": "text/plain"
+    }
+  }
+}

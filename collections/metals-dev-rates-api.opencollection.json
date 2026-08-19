@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Metals.Dev Account Rates API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get latest rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.metals.dev/v1/latest",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Three-letter currency code. Defaults to USD."
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query",
+                "description": "Unit of measure (toz, g, kg, mt). Defaults to toz for precious metals and mt for industrial."
+              }
+            ]
+          },
+          "docs": "Returns live metal prices and 170+ currency conversion rates with timestamps."
+        },
+        {
+          "info": {
+            "name": "Get historical timeseries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.metals.dev/v1/timeseries",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns daily historical rates. Maximum 30-day range per request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

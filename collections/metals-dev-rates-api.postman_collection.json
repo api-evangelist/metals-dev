@@ -1,0 +1,241 @@
+{
+  "item": [
+    {
+      "id": "1e7468b6-084f-4bc4-8c72-d81c4615905d",
+      "name": "Rates",
+      "description": {
+        "content": "Latest and historical metal and currency rates.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "659c54db-3b2c-4601-9f01-e4a339042a01",
+          "name": "Get latest rates",
+          "request": {
+            "name": "Get latest rates",
+            "description": {
+              "content": "Returns live metal prices and 170+ currency conversion rates with timestamps.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "USD",
+                  "description": "Three-letter currency code. Defaults to USD."
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "<string>",
+                  "description": "Unit of measure (toz, g, kg, mt). Defaults to toz for precious metals and mt for industrial."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "02c95674-45e5-4988-a40f-402bb7224f04",
+              "name": "Latest rates.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"currency\": \"string\",\n  \"unit\": \"string\",\n  \"timestamp\": \"2002-10-16T03:52:59.152Z\",\n  \"error_code\": 496,\n  \"error_message\": \"string\",\n  \"metals\": {\n    \"key_0\": 3693.0132612543453,\n    \"key_1\": 1321.2271808063758,\n    \"key_2\": 2759.213233355804\n  },\n  \"currencies\": {\n    \"key_0\": 3684.3510695522787\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0036086d-5320-4131-b80c-e8444a429bbc",
+          "name": "Get historical timeseries",
+          "request": {
+            "name": "Get historical timeseries",
+            "description": {
+              "content": "Returns daily historical rates. Maximum 30-day range per request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "timeseries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "27f2e7b3-9b00-4314-aa23-a61dfde2ca2c",
+              "name": "Historical timeseries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timeseries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"currency\": \"string\",\n  \"unit\": \"string\",\n  \"timestamp\": \"1989-12-05T16:36:03.058Z\",\n  \"error_code\": 6728,\n  \"error_message\": \"string\",\n  \"start_date\": \"1956-09-24\",\n  \"end_date\": \"1965-11-16\",\n  \"rates\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.metals.dev/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5dea64b4-1ff9-4e59-9caa-be52c220fcf9",
+    "name": "Metals.Dev Account Rates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Metals.Dev provides a developer-friendly JSON API for spot prices of precious metals, industrial metals, and currency conversion rates. It offers real-time prices from leading authorities including LBMA, LME, MCX, and IBJA, plus 5+ years of historical data.\n\nContact Support:\n Name: Metals.Dev",
+      "type": "text/plain"
+    }
+  }
+}
