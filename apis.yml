@@ -114,6 +114,8 @@ apis:
   - type: GettingStarted
     url: https://metals.dev/docs#getting-started
 common:
+  - type: Website
+    url: https://www.metals.dev/
   - type: AgenticAccess
     url: agentic-access/metals-dev-agentic-access.yml
   - type: DomainSecurity
