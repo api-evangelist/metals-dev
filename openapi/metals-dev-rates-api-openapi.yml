@@ -73,6 +73,21 @@ paths:
                 $ref: '#/components/schemas/TimeseriesResponse'
 components:
   schemas:
+    TimeseriesResponse:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        properties:
+          start_date:
+            type: string
+            format: date
+          end_date:
+            type: string
+            format: date
+          rates:
+            type: object
+            additionalProperties:
+              type: object
     LatestResponse:
       allOf:
       - $ref: '#/components/schemas/BaseResponse'
@@ -102,21 +117,6 @@ components:
           type: integer
         error_message:
           type: string
-    TimeseriesResponse:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        properties:
-          start_date:
-            type: string
-            format: date
-          end_date:
-            type: string
-            format: date
-          rates:
-            type: object
-            additionalProperties:
-              type: object
   securitySchemes:
     apiKey:
       type: apiKey
