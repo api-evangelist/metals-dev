@@ -40,15 +40,6 @@ paths:
                 $ref: '#/components/schemas/CurrenciesResponse'
 components:
   schemas:
-    CurrenciesResponse:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        properties:
-          currencies:
-            type: object
-            additionalProperties:
-              type: number
     BaseResponse:
       type: object
       properties:
@@ -65,6 +56,15 @@ components:
           type: integer
         error_message:
           type: string
+    CurrenciesResponse:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        properties:
+          currencies:
+            type: object
+            additionalProperties:
+              type: number
   securitySchemes:
     apiKey:
       type: apiKey
