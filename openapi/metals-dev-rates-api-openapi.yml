@@ -73,6 +73,19 @@ paths:
                 $ref: '#/components/schemas/TimeseriesResponse'
 components:
   schemas:
+    LatestResponse:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        properties:
+          metals:
+            type: object
+            additionalProperties:
+              type: number
+          currencies:
+            type: object
+            additionalProperties:
+              type: number
     BaseResponse:
       type: object
       properties:
@@ -104,19 +117,6 @@ components:
             type: object
             additionalProperties:
               type: object
-    LatestResponse:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        properties:
-          metals:
-            type: object
-            additionalProperties:
-              type: number
-          currencies:
-            type: object
-            additionalProperties:
-              type: number
   securitySchemes:
     apiKey:
       type: apiKey

@@ -54,6 +54,17 @@ paths:
                 $ref: '#/components/schemas/AuthorityResponse'
 components:
   schemas:
+    AuthorityResponse:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        properties:
+          authority:
+            type: string
+          metals:
+            type: object
+            additionalProperties:
+              type: number
     BaseResponse:
       type: object
       properties:
@@ -70,17 +81,6 @@ components:
           type: integer
         error_message:
           type: string
-    AuthorityResponse:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        properties:
-          authority:
-            type: string
-          metals:
-            type: object
-            additionalProperties:
-              type: number
   securitySchemes:
     apiKey:
       type: apiKey
